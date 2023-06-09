@@ -1,0 +1,32 @@
+{
+  "name": "alexoreilly",
+  "version": "1.0.0",
+  "description": "A personal npm card for Alex O'Reilly (@alekzandriia)",
+  "main": "index.js",
+  "type": "module",
+  "bin": {
+    "aoreilly": "./bin/index.js"
+  },
+  "files": [
+    "bin/"
+  ],
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "npm",
+    "npx",
+    "node",
+    "javascript",
+    "front-end",
+    "npx card",
+    "business card"
+  ],
+  "author": "Alex O'Reilly <hello@alekzandriia.com> (https://www.alekzandriia.com)",
+  "license": "ISC",
+  "dependencies": {
+    "chalk": "^5.2.0",
+    "chalk-animation": "^2.0.3",
+    "terminal-link": "^3.0.0"
+  }
+}
