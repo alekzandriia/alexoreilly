@@ -71,6 +71,8 @@ async function displayLinks () {
   ${chalk.bgMagenta(`Github  `)} -> ${chalk.magenta(`${links.github}`)}
   ${chalk.bgBlue(`CodePen `)} -> ${chalk.blue(`${links.codepen}`)}
   ${chalk.bgMagenta(`Dribbble`)} -> ${chalk.magenta(`${links.dribbble}`)}
+
+  Tip: Try ${chalk.blue('cmd/ctrl + click')} on the links above
   `)
 
 }
