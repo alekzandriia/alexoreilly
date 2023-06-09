@@ -1,10 +1,10 @@
 #!/usr/bin/env node
 
-import chalk from 'chalk'; // pretty colours
-import chalkAnimation from 'chalk-animation'; // animations
-import terminalLink from 'terminal-link'; // clickable links
-
-// TIP: use backticks to facilitate line breaks (template literals)
+import chalk from 'chalk' // pretty colours
+import chalkAnimation from 'chalk-animation' // animations
+import terminalLink from 'terminal-link' // clickable links
+import {select, confirm} from '@inquirer/prompts'; // interactive menu
+import open from 'open' // open links 
 
 // LINKS
 const username = 'alekzandriia'
@@ -20,39 +20,78 @@ const links = {
 const info = {
   name: "Alex O'Reilly",
   location: "Canada",
+  email: "hello@alekzandriia.com",
+  twitterID: "1416902515275321352",
   humanLang: ["English (native)", "Spanish (In progress)"],
   compLang: ["HTML", "CSS", "JavaScript", "SQL", "Bash"],
   tech: ["React", "Tailwind", "Bootstrap", "Express", "MongoDB", "Wordpress", "Figma"],
 }
 
-// Message
-const message = "Oh hey there!"
-console.log(message)
-
-// async function message() {
-//   console.log(chalk.blue(`
-// Hey, How's it going?
-// This is a test!
-// Text.... text....        <3
-
-// ${chalk.red("I'm RED")}
-//         ${website}
-// `))
-// }
-
-
-
-const titleAnimation = (title, name) => {
-  const rainbow = chalkAnimation.rainbow(title)
-  setTimeout(()=> {
-    const glitch = chalkAnimation.glitch(name)
-    setTimeout(()=> {
-      glitch.stop()
-    },3000)
-  },3000)
+// TIP: use backticks to facilitate line breaks (template literals)
+const message = "Oh hey there! You've found my business card."
+const displayMessage = () => {
+  console.log(`${chalk.magenta(message)}`)
 }
 
+const contactMethods = async () => {
+  const answer = await select({
+    message: "Let's get in touch!",
+    choices: [
+      {
+        name: 'twitter',
+        value: 'twitter',
+        description: `Send a twitter DM to ${username}`,
+      },
+      {
+        name: 'email',
+        value: 'email',
+        description: `Send an email to ${info.email}`,
+      },
+      {
+        name: 'cancel',
+        value: 'cancel',
+        description: 'Actually, Maybe later',
+      }
+    ],
+  });
+  if (answer === 'twitter') {
+    open(`https://twitter.com/messages/compose?recipient_id=${info.twitterId}`)
+  }
+  if (answer === 'email') {
+    open(`mailto:${info.email}`)
+  }
+}
 
-//titleAnimation('Business Card', 'alekzandriia')
+async function displayLinks () {
+  console.log(`
+  Find me on the internet.
 
+  ${chalk.bgMagenta(`Website `)} -> ${chalk.magenta(`${links.website}`)}
+  ${chalk.bgBlue(`Twitter `)} -> ${chalk.blue(`${links.twitter}`)}
+  ${chalk.bgMagenta(`Github  `)} -> ${chalk.magenta(`${links.github}`)}
+  ${chalk.bgBlue(`CodePen `)} -> ${chalk.blue(`${links.codepen}`)}
+  ${chalk.bgMagenta(`Dribbble`)} -> ${chalk.magenta(`${links.dribbble}`)}
+  `)
 
+}
+
+// Display Card
+const titleAnimation = () => {
+  const rainbow = chalkAnimation.rainbow(`${username}`)
+  setTimeout(()=> {
+    const glitch = chalkAnimation.karaoke(`${info.name}\n`)
+    setTimeout(()=> {
+      glitch.stop()
+      displayMessage()
+      displayLinks()
+      setTimeout(async ()=> {
+        const answer = await confirm({ message: `${chalk.yellow('Want to say hi?')}` });
+          if (answer) {
+            contactMethods()
+          }
+      },3000)
+    },2000)
+  },1000)
+}
+
+titleAnimation()

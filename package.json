@@ -25,6 +25,7 @@
   "author": "Alex O'Reilly <hello@alekzandriia.com> (https://www.alekzandriia.com)",
   "license": "ISC",
   "dependencies": {
+    "@inquirer/prompts": "^2.1.1",
     "chalk": "^5.2.0",
     "chalk-animation": "^2.0.3",
     "terminal-link": "^3.0.0"
